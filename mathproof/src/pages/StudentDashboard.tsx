@@ -50,7 +50,7 @@ export default function StudentDashboard() {
       )
       setProvider(provider)
       const program = new Program(idl as any, provider)
-      const accounts = await program.account.challenge.all()
+     const accounts = await (program.account as any).challenge.all()
       const parsed = accounts.map((a: any) => ({
         publicKey: a.publicKey.toString(),
         title: a.account.title,
@@ -96,7 +96,7 @@ export default function StudentDashboard() {
       const program = new Program(idl as any, provider)
 
       const challengePubkey = new PublicKey(selected.publicKey)
-      const teacherPubkey = new PublicKey(selected.teacher)
+    
 
       const [submissionPDA] = PublicKey.findProgramAddressSync(
         [
