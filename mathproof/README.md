@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# MathProof Quest 🧮
+### Decentralized Math Challenge & Homework Verification Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Built on Solana Devnet as a final project assignment.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What is MathProof Quest?
+A Web3 platform where teachers create math challenges stored on the Solana blockchain, and students solve them to earn token rewards. All submissions are transparent and tamper-proof.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Program ID
+F2ARYj2A3s3mYtk3iQ8cjysBo92J2Hk5k3jciACSbN9n
 
-## Expanding the ESLint configuration
+## Network
+Solana Devnet
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Features
+- Teacher connects Phantom wallet and creates math challenges on-chain
+- Challenges stored as PDAs on Solana devnet
+- Students view real challenges fetched from blockchain
+- Students submit answers — verified by smart contract
+- Submission count tracked on-chain in real time
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Tech Stack
+| Layer | Technology |
+|---|---|
+| Blockchain | Solana + Anchor |
+| Frontend | React + Vite + TypeScript |
+| Styling | Tailwind CSS v4 |
+| Wallet | Reown AppKit + Phantom |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Project Structure
