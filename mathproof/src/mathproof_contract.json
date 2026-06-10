@@ -1,0 +1,312 @@
+{
+  "address": "F2ARYj2A3s3mYtk3iQ8cjysBo92J2Hk5k3jciACSbN9n",
+  "metadata": {
+    "name": "mathproof_contract",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_challenge",
+      "discriminator": [
+        170,
+        244,
+        47,
+        1,
+        1,
+        15,
+        173,
+        239
+      ],
+      "accounts": [
+        {
+          "name": "challenge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  108,
+                  108,
+                  101,
+                  110,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "teacher"
+              },
+              {
+                "kind": "arg",
+                "path": "title"
+              }
+            ]
+          }
+        },
+        {
+          "name": "teacher",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "topic",
+          "type": "string"
+        },
+        {
+          "name": "problem",
+          "type": "string"
+        },
+        {
+          "name": "answer",
+          "type": "string"
+        },
+        {
+          "name": "reward",
+          "type": "u64"
+        },
+        {
+          "name": "difficulty",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "submit_answer",
+      "discriminator": [
+        221,
+        73,
+        184,
+        157,
+        1,
+        150,
+        231,
+        48
+      ],
+      "accounts": [
+        {
+          "name": "challenge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  108,
+                  108,
+                  101,
+                  110,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "challenge.teacher",
+                "account": "Challenge"
+              },
+              {
+                "kind": "account",
+                "path": "challenge.title",
+                "account": "Challenge"
+              }
+            ]
+          }
+        },
+        {
+          "name": "submission",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  98,
+                  109,
+                  105,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "challenge"
+              },
+              {
+                "kind": "account",
+                "path": "student"
+              }
+            ]
+          }
+        },
+        {
+          "name": "student",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "answer",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Challenge",
+      "discriminator": [
+        119,
+        250,
+        161,
+        121,
+        119,
+        81,
+        22,
+        208
+      ]
+    },
+    {
+      "name": "Submission",
+      "discriminator": [
+        58,
+        194,
+        159,
+        158,
+        75,
+        102,
+        178,
+        197
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "ChallengeNotActive",
+      "msg": "Challenge is not active"
+    },
+    {
+      "code": 6001,
+      "name": "AlreadySubmitted",
+      "msg": "Already submitted an answer"
+    },
+    {
+      "code": 6002,
+      "name": "TitleTooLong",
+      "msg": "Title too long"
+    },
+    {
+      "code": 6003,
+      "name": "AnswerTooLong",
+      "msg": "Answer too long"
+    }
+  ],
+  "types": [
+    {
+      "name": "Challenge",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "teacher",
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "topic",
+            "type": "string"
+          },
+          {
+            "name": "problem",
+            "type": "string"
+          },
+          {
+            "name": "answer",
+            "type": "string"
+          },
+          {
+            "name": "reward",
+            "type": "u64"
+          },
+          {
+            "name": "difficulty",
+            "type": "u8"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "submission_count",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Submission",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "student",
+            "type": "pubkey"
+          },
+          {
+            "name": "challenge",
+            "type": "pubkey"
+          },
+          {
+            "name": "answer",
+            "type": "string"
+          },
+          {
+            "name": "is_correct",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}
